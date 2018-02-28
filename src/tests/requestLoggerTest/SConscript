@@ -1,0 +1,24 @@
+env = hEnv().Clone()
+
+# FIXME!!!!!
+# BcSdk and BCUrl libs should be inferred from rpath!!!
+libs = hSplit("""
+		backendLib
+		utils
+		pq
+		proto
+		protobuf
+		boost_system
+		boost_thread
+		boost_program_options
+		boost_date_time
+	""")
+
+hProg("requestLoggerTest",
+	libs = libs,
+	srcs = hSplit("""
+		requestLoggerTest.cpp
+	"""),
+	env = env
+)
+

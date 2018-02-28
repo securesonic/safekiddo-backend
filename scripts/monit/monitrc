@@ -1,0 +1,75 @@
+###############################################################################
+# see /etc/monit/monitrc for more examples
+###############################################################################
+
+## Start Monit in the background (run as a daemon):
+#
+set daemon  5             # check services at 5-second intervals (override global 2 minutes)
+
+## Monit by default uses the following format for alerts if the the mail-format
+## statement is missing::
+## --8<--
+## set mail-format {
+##      from: monit@$HOST
+##   subject: monit alert --  $EVENT $SERVICE
+##   message: $EVENT Service $SERVICE
+##                 Date:        $DATE
+##                 Action:      $ACTION
+##                 Host:        $HOST
+##                 Description: $DESCRIPTION
+##
+##            Your faithful employee,
+##            Monit
+## }
+## --8<--
+
+set mail-format {
+	from: mailer@safekiddo.com
+	subject: monit alert - $EVENT on service $SERVICE on $HOST
+	message: $EVENT Service $SERVICE
+	Date: $DATE
+	Action: $ACTION
+	Host:	$HOST
+	Description: $DESCRIPTION
+}
+
+##
+## You can override this message format or parts of it, such as subject
+## or sender using the MAIL-FORMAT statement. Macros such as $DATE, etc.
+## are expanded at runtime. For example, to override the sender, use:
+#
+# set mail-format { from: monit@foo.bar }
+#
+#
+## You can set alert recipients whom will receive alerts if/when a 
+## service defined in this file has errors. Alerts may be restricted on 
+## events by using a filter as in the second example below. 
+#
+# set alert sysadm@foo.bar                       # receive all alerts
+# set alert manager@foo.bar only on { timeout }  # receive just service-
+
+set alert safekiddo@9livesdata.com not on {action}
+
+## Monit has an embedded web server which can be used to view status of 
+## services monitored and manage services from a web interface. See the
+## Monit Wiki if you want to enable SSL for the web server. 
+#
+
+set httpd port 9001 and
+    use address localhost  # only accept connection from localhost
+    #use address 10.0.0.104
+    allow localhost        # allow localhost to connect to the server and
+    #allow monit:monit
+    #allow admin:monit      # require user 'admin' with password 'monit'
+    #allow @monit           # allow users of group 'monit' to connect (rw)
+    #allow @users readonly  # allow users of group 'users' to connect readonly
+
+
+#set mailserver smtp.gmail.com port 587
+#	username "safekiddo.9ld" password "safekiddo9ld"
+#	using tlsv1
+
+set mailserver email-smtp.eu-west-1.amazonaws.com port 587
+	username "AKIAIDXYZFKO7SMYJVLQ" password "Au0cmMRVRG0ETKlLU3KRLTuZeZfx4XMUDnn3F5TwRj2O"
+	using tlsv1
+

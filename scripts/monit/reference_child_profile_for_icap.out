@@ -1,0 +1,19 @@
+ id | name  | birth_date | code_parent_id | uuid  | default_custom_code_profile_id | avatars_id | deleted_at 
+----+-------+------------+----------------+-------+--------------------------------+------------+------------
+  2 | Monit | 2014-01-01 |              2 | 70514 |                              2 |          0 | 
+(1 row)
+
+ id |     name      | owner_code_parent_id 
+----+---------------+----------------------
+  2 | Monit profile |                    2
+(1 row)
+
+ id | code_profile_id | code_categories_groups_id | blocked 
+----+-----------------+---------------------------+---------
+  2 |               2 |                         3 | t
+(1 row)
+
+ id | code_profile_id | code_url_id | blocked 
+----+-----------------+-------------+---------
+(0 rows)
+

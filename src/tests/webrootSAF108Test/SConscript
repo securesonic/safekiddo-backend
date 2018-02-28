@@ -1,0 +1,21 @@
+env = hEnv().Clone()
+
+libs = hSplit("""
+		BcSdk
+		BCUrl
+		webrootCpp
+		utils
+		backendLib
+		boost_system
+		boost_thread
+		boost_date_time
+	""")
+
+hProg("webrootSAF108Test",
+	libs = libs,
+	srcs = hSplit("""
+		webrootSAF108Test.cpp
+	"""),
+	env = env
+)
+

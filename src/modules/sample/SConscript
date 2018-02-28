@@ -1,0 +1,2 @@
+env = hEnv().Clone()
+hProg("sample", libs = [], srcs = ["*.cpp"], env = env)

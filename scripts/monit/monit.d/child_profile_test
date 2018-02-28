@@ -1,0 +1,2 @@
+check program child_profile_test with path "/sk/scripts/monit/child_profile_test.sh"
+	if status != 0 then alert

@@ -1,0 +1,36 @@
+import subprocess
+import wrpManager
+import datetime
+import platform
+import os
+
+GET_VERSION_COMMAND = 'git describe --abbrev=8 --always'
+
+env = hEnv().Clone()
+env.CacheDir(None) # disable cache so that the version always regenerates
+
+generatedFilesDir = '#' + wrpManager.toObjPath('generated/version')
+
+def generateVersion(target, source, env):
+	version = subprocess.check_output(GET_VERSION_COMMAND, shell = True).strip()
+	buildDate = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S GMT")
+	buildHost = platform.node()
+	buildConfig = os.getenv('CONFIG')
+	
+	template = file(source[0].path, "rt").read()
+	template = template % {
+		"VERSION_STRING": version,
+		"BUILD_DATE": buildDate,
+		"BUILD_HOST": buildHost,
+		"BUILD_CONFIG": buildConfig
+	}
+	generatedFile = file(target[0].path, "w+t")
+	generatedFile.write(template)
+
+versionFile = env.Command(generatedFilesDir + '/version.cpp', 'version.cpp.in', Action(generateVersion))
+env.AlwaysBuild(versionFile)
+
+hStaticLib("version",
+	srcs = [ versionFile ],
+	env = env
+)

@@ -1,0 +1,25 @@
+env = hEnv().Clone()
+
+libs = hSplit("""
+		proto
+		protobuf
+		zmq
+		boost_system
+		boost_thread
+		boost_date_time
+		boost_program_options
+	""")
+
+hProg("dealer",
+	libs = libs,
+	srcs = ["dealer.cpp"],
+	env = env
+)
+
+
+hProg("direct",
+	libs = libs,
+	srcs = ["direct.cpp"],
+	env = env
+)
+

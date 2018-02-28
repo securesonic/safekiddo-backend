@@ -1,0 +1,1 @@
+insert into devices (id, child_id, uuid, mdm_token, created_at, updated_at) VALUES (176, 19, '2bff09471d6f81b3ccd5454bc92901dc','55722@dev.safekiddo.com', '2014-01-08', '2014-01-08');

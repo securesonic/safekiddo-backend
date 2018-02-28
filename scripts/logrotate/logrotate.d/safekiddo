@@ -1,0 +1,40 @@
+/mnt/log/safekiddo/backend.log {
+	rotate 100
+	size 10M
+	postrotate
+		echo "reopenLog" > /sk/run/safekiddo/backendMgmt.fifo
+	endscript
+	compress
+}
+
+/mnt/log/safekiddo/backend.err {
+	rotate 30
+	weekly
+	copytruncate
+	compress
+}
+
+/mnt/log/safekiddo/httpd.log {
+	rotate 100
+	size 10M
+	postrotate
+		echo "reopenLog" > /sk/run/safekiddo/httpdMgmt.fifo
+	endscript
+	compress
+}
+
+/mnt/log/safekiddo/httpd.err {
+	rotate 30
+	weekly
+	copytruncate
+	compress
+}
+
+/mnt/log/safekiddo/backend.stats {
+	rotate 10
+	weekly
+	postrotate
+		echo "reopenStatsFile" > /sk/run/safekiddo/backendMgmt.fifo
+	endscript
+	compress
+}

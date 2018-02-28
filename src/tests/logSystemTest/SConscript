@@ -1,0 +1,16 @@
+env = hEnv().Clone()
+
+libs = hSplit("""
+		utils
+		boost_system
+		boost_thread
+		boost_date_time
+	""")
+
+hProg("logSystemTest",
+	libs = libs,
+	srcs = hSplit("""
+		logSystemTest.cpp
+	"""),
+	env = env
+)

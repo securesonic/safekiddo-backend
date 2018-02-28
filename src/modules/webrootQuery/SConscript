@@ -1,0 +1,25 @@
+env = hEnv().Clone()
+
+# FIXME!!!!!
+# BcSdk and BCUrl libs should be inferred from rpath!!!
+libs = hSplit("""
+		BcSdk
+		BCUrl
+		webrootCpp
+		utils
+		boost_system
+		boost_thread
+		boost_program_options
+		boost_date_time
+		version
+		ssl
+		crypto
+	""")
+
+hProg("webrootQuery",
+	libs = libs,
+	srcs = hSplit("""
+		webrootQuery.cpp
+	"""),
+	env = env
+)

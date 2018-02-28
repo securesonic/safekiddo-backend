@@ -1,0 +1,18 @@
+import os
+
+if int(os.environ["BUILD_BACKEND"]) == 1:
+	hSubdir("stats")
+	hSubdir("version")
+	hSubdir("sample", alias = "sample")
+	hSubdir("proto", alias = "proto")
+	#hSubdir("zmqServer", alias = "zmqServer")
+	hSubdir("httpd", alias = "httpd")
+	hSubdir("tester", alias = "tester")
+	hSubdir("backend")
+	hSubdir("backendLib")
+	hSubdir("webrootCpp")
+
+hSubdir("utils")
+
+if int(os.environ["BUILD_BACKEND"]) == 1:
+	hSubdir("webrootQuery")

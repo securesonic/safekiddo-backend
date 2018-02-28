@@ -1,0 +1,14 @@
+env = hEnv().Clone()
+
+libs = hSplit("""
+		BcSdk
+		BCUrl
+	""")
+# 		 -laes -lssl -lcrypto -pthread -lrt
+
+hDynamicLib("webrootCpp",
+	libs = libs,
+	srcs = ["*.cpp"],
+	env = env
+)
+

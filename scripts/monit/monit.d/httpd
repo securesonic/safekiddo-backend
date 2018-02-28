@@ -1,0 +1,10 @@
+check process httpd
+	matching "./httpd.exe --connectionLimit 800.*"
+	start program = "/sk/scripts/monit/startHttpd.sh" as uid safekiddo gid safekiddo
+	stop program = "/sk/scripts/monit/stopHttpd.sh" as uid safekiddo gid safekiddo
+	if failed port 8080
+	#type tcpssl
+	send "get /cc http/1.1\r\nRequest: redtube.com\r\nUserId: 70514\r\nUserAction: 0\r\n\r\n"
+	expect "^HTTP/1.1.*Result: 1.*"
+	with timeout 7 seconds retry 3 then
+	exec "/sk/scripts/monit/httpdHealthCheckFailed.sh" as uid safekiddo gid safekiddo

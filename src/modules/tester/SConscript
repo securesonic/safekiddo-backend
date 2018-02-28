@@ -1,0 +1,29 @@
+env = hEnv().Clone()
+
+
+
+
+hStaticLib("lowio",
+	srcs = Split("serverSocket.cc descriptor.cc tcpSocket.cc"),
+	env = env
+)
+
+
+libs = hSplit("""
+		lowio
+		proto
+		protobuf
+		boost_system
+		boost_thread
+		boost_date_time
+		boost_program_options
+		rt
+	""")
+
+
+hProg("tester",
+	libs = libs,
+	srcs = ["tester.cpp"],
+	env = env
+)
+

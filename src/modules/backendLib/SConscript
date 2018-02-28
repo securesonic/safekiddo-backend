@@ -1,0 +1,16 @@
+env = hEnv().Clone()
+
+
+
+
+hStaticLib("backendLib",
+	srcs = hSplit("""
+		config.cpp
+		dbClient.cpp
+		hitBySourceStatisticsSender.cpp
+		requestLogger.cpp
+		currentTime.cpp
+		webrootOverrides.cpp
+	"""),
+	env = env
+)

@@ -1,0 +1,21 @@
+env = hEnv().Clone()
+
+libs = hSplit("""
+		BcSdk
+		BCUrl
+		webrootCpp
+		utils
+		backendLib
+		boost_system
+		boost_thread
+		boost_date_time
+	""")
+
+hProg("webrootCloudCacheTest",
+	libs = libs,
+	srcs = hSplit("""
+		webrootCloudCacheTest.cpp
+	"""),
+	env = env
+)
+

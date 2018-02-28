@@ -1,0 +1,14 @@
+env = hEnv().Clone()
+
+libs = hSplit("""
+		boost_thread
+		boost_date_time
+		ssl
+		crypto
+	""")
+
+hDynamicLib("utils",
+	libs = libs,
+	srcs = ["*.cpp"],
+	env = env
+)

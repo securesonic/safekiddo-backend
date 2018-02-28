@@ -1,0 +1,42 @@
+import os
+import wrpManager
+import shutil
+
+env = hEnv().Clone()
+
+conf = Configure(env)
+# if not conf.CheckLib("microhttpd"):
+# 	print "libmicrohttpd not found!"
+# 	Exit(1)
+env = conf.Finish()
+
+libs = hSplit("""
+		proto
+		protobuf
+		utils
+		zmq
+		microhttpd
+		boost_system
+		boost_regex
+		boost_thread
+		boost_date_time
+		boost_program_options
+		version
+	""")
+
+hProg("httpd",
+	libs = libs,
+	srcs = hSplit("""
+		httpd.cc
+		httpdMgmt.cpp
+		admissionControlContainer.cpp
+		serverStatus.cpp
+	"""),
+	env = env
+)
+
+rootDir = Dir('#').abspath
+binDir = os.path.join(rootDir, wrpManager.getTargetDir())
+data = { 'binDir' : binDir, 'rootDir': rootDir }
+shutil.copy('%(rootDir)s/ssl/httpd.key' % data, '%(binDir)s/httpd.key' % data)
+shutil.copy('%(rootDir)s/ssl/httpd.pem' % data, '%(binDir)s/httpd.pem' % data)

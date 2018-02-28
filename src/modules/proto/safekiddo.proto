@@ -1,0 +1,39 @@
+package protocol.messages;
+
+message Request
+{
+	enum UserActionCode
+	{
+		NON_INTENTIONAL_REQUEST = 0;
+		INTENTIONAL_REQUEST = 1;
+		CATEGORY_GROUP_QUERY = 2;
+	}
+	// non-UTF8 charset filtering is done on backend; see SAF-227
+	required bytes url = 1;
+	required string userId = 2;
+	required UserActionCode userAction = 3;
+}
+
+message Response
+{
+	enum Result
+	{
+		RES_OK = 0;
+		RES_INTERNET_ACCESS_FORBIDDEN = 100;
+		RES_CATEGORY_BLOCKED_DEFAULT = 110;
+		RES_CATEGORY_BLOCKED_CUSTOM = 111;
+		RES_CATEGORY_BLOCKED_GLOBAL = 112;
+		RES_URL_BLOCKED_DEFAULT = 120;
+		RES_URL_BLOCKED_CUSTOM = 121;
+		RES_URL_BLOCKED_GLOBAL = 122;
+		RES_IP_REPUTATION_CHECK_FAILED = 200;
+		RES_UNKNOWN_USER = 300;
+	}
+	required Result result = 1;
+	optional string usedProfileName = 2;
+	optional int32 usedProfileId = 3;
+	optional string categoryGroupName = 4;
+	optional int32 categoryGroupId = 5;
+}
+
+

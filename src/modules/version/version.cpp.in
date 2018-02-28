@@ -1,0 +1,54 @@
+#include <string>
+#include <linux/limits.h>
+#include <sstream>
+#include <cstdlib>
+#include <cstring>
+#include "unistd.h"
+
+#include "version/version.h"
+
+static std::string const versionString = "%(VERSION_STRING)s";
+static std::string const buildDate = "%(BUILD_DATE)s";
+static std::string const buildHost = "%(BUILD_HOST)s";
+static std::string const buildConfig = "%(BUILD_CONFIG)s";
+
+namespace safekiddo
+{
+namespace version
+{
+
+std::string getVersion()
+{
+	return versionString;
+}
+
+std::string getBuildDate()
+{
+	return buildDate;
+}
+
+std::string getBuildHost()
+{
+	return buildHost;
+}
+
+std::string getBuildConfig()
+{
+	return buildConfig;
+}
+
+std::string getDescription()
+{
+	std::ostringstream oss;
+	oss << "Safekiddo:\n" <<
+		"Version:\t" << getVersion() << "\n" <<
+		"Build config:\t" << getBuildConfig() << "\n" <<
+		"Build date:\t" << getBuildDate() << "\n" <<
+		"Build host:\t" << getBuildHost() << "\n";
+	return oss.str();
+}
+
+
+
+} // namespace version
+} // namespace safekiddo

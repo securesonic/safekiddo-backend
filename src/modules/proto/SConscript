@@ -1,0 +1,27 @@
+import wrpManager
+
+env = hEnv().Clone()
+conf = Configure(env)
+#if not conf.CheckLib("protobuf"):
+#	print "protobuf library not found!"
+#	Exit(1)
+env = conf.Finish()
+
+Import('generatedFilesIncludeDir')
+
+generatorOutDir = generatedFilesIncludeDir + '/proto' 
+Execute(Mkdir(Dir(generatorOutDir)))
+
+# generated files are located in obj/$CONFIG/generated
+protocolFiles = env.Protoc(
+	[],
+	"safekiddo.proto",
+	PROTOCOUTDIR = str(Dir(generatorOutDir))
+)
+
+
+
+hStaticLib("proto",
+	srcs = [ protocolFiles[0]],
+	env = env
+)

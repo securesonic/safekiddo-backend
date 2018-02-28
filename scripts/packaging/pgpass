@@ -1,0 +1,11 @@
+# DEV
+127.0.0.1:5432:skcfg:backend:backendpass01
+127.0.0.1:5432:sklog:backend:backendpass01
+
+# TST
+ec2-54-77-104-124.eu-west-1.compute.amazonaws.com:5432:skcfg:backend:backendpass12#$
+ec2-54-77-104-124.eu-west-1.compute.amazonaws.com:5432:sklog:backend:backendpass12#$
+
+# PROD
+skcfg.ccyc3196jini.eu-west-1.rds.amazonaws.com:5432:skcfg:backend:backendpass12#$
+sklog.ccyc3196jini.eu-west-1.rds.amazonaws.com:5432:sklog:backend:backendpass12#$

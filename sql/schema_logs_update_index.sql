@@ -1,0 +1,1 @@
+drop index request_log_server_timestamp_idx;

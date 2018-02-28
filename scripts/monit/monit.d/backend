@@ -1,0 +1,4 @@
+check process backend
+	matching "./backend.exe --address .*:7777.*"
+	start program = "/sk/scripts/monit/startBackend.sh" as uid safekiddo gid safekiddo
+	stop program = "/sk/scripts/monit/stopBackend.sh" as uid safekiddo gid safekiddo

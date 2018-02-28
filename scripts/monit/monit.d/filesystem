@@ -1,0 +1,5 @@
+check filesystem fsMnt with path /mnt
+	if space usage > 90% then alert
+
+check filesystem fsSk with path /sk
+	if space usage > 90% then alert

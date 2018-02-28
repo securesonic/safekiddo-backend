@@ -1,0 +1,34 @@
+import os
+
+icapLibVersion = '3.0.4'
+icapLocations = ('/usr/local/lib/', '/sk/c-icap/lib/')
+icapExists = False
+for icapLocation in icapLocations:
+	icapLibPath = icapLocation + 'libicapapi.so.' + icapLibVersion
+	icapExists = icapExists or os.path.exists(icapLibPath)
+if not icapExists:	
+	print 'Plugin requires c-icap version %s' % (icapLibVersion,)
+	Exit(1)
+
+env = hEnv().Clone()
+
+hAddCppDefine("CI_BUILD_MODULE", env = env)
+
+libs = hSplit("""
+	boost_system
+	utils
+	ssl
+	crypto
+""")
+
+hDynamicLib("IcapService",
+	libs = libs,
+	srcs = hSplit("""
+		srv_safekiddo.cc 
+		tcpSocket.cc 
+		descriptor.cc 
+		tcpCache.cc
+		apiConnect.cpp
+	"""),
+	env = env
+)

@@ -1,0 +1,33 @@
+env = hEnv().Clone()
+
+
+# FIXME!!!!!
+# BcSdk and BCUrl libs should be inferred from rpath!!!
+libs = hSplit("""
+		backendLib
+		BcSdk
+		BCUrl
+		webrootCpp
+		stats
+		utils
+		pq
+		zmq
+		proto
+		protobuf
+		boost_system
+		boost_thread
+		boost_program_options
+		boost_date_time
+		version
+	""")
+
+hProg("backend",
+	libs = libs,
+	srcs = hSplit("""
+		backend.cpp
+		server.cpp
+		backendMgmt.cpp
+	"""),
+	env = env
+)
+

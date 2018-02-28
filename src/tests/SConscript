@@ -1,0 +1,6 @@
+hSubdir("requestLoggerTest")
+hSubdir("webrootCloudCacheTest")
+hSubdir("webrootDbUpdatesTest")
+hSubdir("webrootSAF108Test")
+hSubdir("webrootDbRemovalTest")
+hSubdir("logSystemTest")

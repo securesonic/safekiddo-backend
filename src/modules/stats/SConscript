@@ -1,0 +1,6 @@
+env = hEnv().Clone()
+
+hDynamicLib("stats",
+	srcs = ["*.cpp"],
+	env = env
+)

@@ -1,0 +1,21 @@
+env = hEnv().Clone()
+
+libs = hSplit("""
+		BcSdk
+		BCUrl
+		webrootCpp
+		backendLib
+		utils
+		boost_system
+		boost_thread
+		boost_date_time
+	""")
+
+hProg("webrootDbUpdatesTest",
+	libs = libs,
+	srcs = hSplit("""
+		webrootDbUpdatesTest.cpp
+	"""),
+	env = env
+)
+
